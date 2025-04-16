@@ -54,3 +54,14 @@ def criar_produto():
     Session.add(novo_produto)
     Session.commit()
 
+#DELETE
+def excluir_produto():
+    nome_produto = str(input("Qual produto deseja excluir?"))
+    
+    produto = Session.query(Lojinha).filter_by(nome_produto=nome_produto).first()
+    if produto:
+        Session.delete(produto)
+        Session.commit()
+        print(f"{nome_produto} foi deletado com sucesso!")
+    else:
+        print(f"Não existe nenhum produto com este nome...")
