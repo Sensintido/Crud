@@ -16,3 +16,29 @@ class Lojinha(Base):
     marca = Column(String, nullable=False)
 
 Base.metadata.create_all(db)
+
+def menu():
+    while True:
+        print("1- Adicionar Produto" \
+            "2-Excluir Produto" \
+            "3-Atualizar tabela" \
+            "4-Modificar Tabela")
+        
+        resposta = int(input("O que você deseja fazer?"))
+
+        if resposta == 1:
+            criar_produto()
+            break
+        elif resposta == 2:
+            excluir_produto()
+            break
+        elif resposta == 3:
+            Atualizar_tb()
+            break
+        elif resposta == 4:
+            Modificar_tb()
+            break
+        else:
+            print("Você Não Digitou Nenhuma Opção Permitida!!!")
+        return
+
