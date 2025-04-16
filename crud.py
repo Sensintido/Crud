@@ -42,3 +42,15 @@ def menu():
             print("Você Não Digitou Nenhuma Opção Permitida!!!")
         return
 
+#CREAT
+def criar_produto():
+    nome_produto = str(input("Qual o nome do seu produto?"))
+    quant = int(input("Quanto você quer adicionar?"))
+    preco = float(input("Qual o preço do seu produto?"))
+    marca = str(input("E qual marca deseja adicionar?"))
+
+    novo_produto = Lojinha(nome_produto=nome_produto, quant=quant, preco=preco,marca=marca)
+
+    Session.add(novo_produto)
+    Session.commit()
+
