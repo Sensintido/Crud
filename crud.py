@@ -19,10 +19,7 @@ Base.metadata.create_all(db)
 
 def menu():
     while True:
-        print("1- Adicionar Produto" \
-            "2-Excluir Produto" \
-            "3-Atualizar tabela" \
-            "4-Modificar Tabela")
+        print("1- Adicionar Produto\n" "2- Excluir Produto\n" "3- Ver tabela\n" "4- Modificar Tabela")
         
         resposta = int(input("O que você deseja fazer?"))
 
@@ -33,7 +30,7 @@ def menu():
             excluir_produto()
             break
         elif resposta == 3:
-            Atualizar_tb()
+            Ver_Tabela()
             break
         elif resposta == 4:
             Modificar_tb()
@@ -65,3 +62,58 @@ def excluir_produto():
         print(f"{nome_produto} foi deletado com sucesso!")
     else:
         print(f"Não existe nenhum produto com este nome...")
+    
+
+#READ
+def Ver_Tabela():
+    produtos = Session.query(Lojinha).all()
+
+    if produtos:
+        print("Aqui Estão Seus Produtos:")
+    for produto in produtos:
+        print(f"ID: {produto.id} Nome:{produto.nome_produto} Quantidade:{produto.quant} Preço:R${produto.preco} Marca:{produto.marca}")
+    else:
+        print("Não Existem Produtos Adiconados")
+
+#UPDATE
+def Modificar_tb():
+        nome_antigo = str(input("Oque Deseja Modificar?"))
+        produto = Session.query(Lojinha).filter_by(nome_produto = nome_antigo).first()
+
+        if not produto:
+            print("Produto Não Encontrado")
+            return
+
+        print(f"Produto Encontrado: Nome:{produto.nome_produto} Quantidade:{produto.quant} Preço:R${produto.preco} Marca:{produto.marca}")
+        print("Oque Deseja Modificar?")
+        print("[1] Nome [2]Quantidade [3]Preço [4]Marca [5]Todos")
+
+        opcao_escolhida = int(input(""))
+
+        if opcao_escolhida == 1:
+            novo_nome = str(input("Insira um Novo Nome: "))
+            produto.nome_produto = novo_nome
+        elif opcao_escolhida == 2:
+            nova_quantia = int(input("Informe a Nova Quantia: "))
+            produto.quant = nova_quantia
+        elif opcao_escolhida == 3:
+            novo_preco = float(input("Informe o Novo Preço: "))
+            produto.preco = novo_preco
+        elif opcao_escolhida == 4:
+            nova_marca = str(input("Informe a Nova Marca: "))
+            produto.marca = nova_marca
+        elif opcao_escolhida == 5:
+            novo_nome = produto.nome_produto = str(input("Nome: "))
+            nova_quantia = produto.quant = int(input("Quantidade: "))
+            novo_preco = produto.preco = float(input("Preço: "))
+            nova_marca = produto.marca =str(input("Marca: "))
+        else:
+            print("Opção Inválida")
+            return
+        
+        Session.commit()
+        print("Produto Adiconado com Sucesso!")
+    
+
+menu()
+
