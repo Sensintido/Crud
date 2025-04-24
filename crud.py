@@ -42,6 +42,12 @@ def menu():
 #CREAT
 def criar_produto():
     nome_produto = str(input("Qual o nome do seu produto?"))
+    produto_existente = Session.query(Lojinha).filter_by(nome_produto=nome_produto).first()
+
+    if produto_existente:
+        print("Já temos um Produto com este Nome")
+        menu_repetir()
+        
     quant = int(input("Quanto você quer adicionar?"))
     preco = float(input("Qual o preço do seu produto?"))
     marca = str(input("E qual marca deseja adicionar?"))
