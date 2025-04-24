@@ -54,9 +54,14 @@ def criar_produto():
 
 #DELETE
 def excluir_produto():
+    print("Aqui está a tabela de Produtos")
+    Ver_Tabela()
+
     nome_produto = str(input("Qual produto deseja excluir?"))
     
+
     produto = Session.query(Lojinha).filter_by(nome_produto=nome_produto).first()
+    
     if produto:
         Session.delete(produto)
         Session.commit()
