@@ -30,7 +30,7 @@ def menu():
             excluir_produto()
             break
         elif resposta == 3:
-            Ver_Tabela()
+            Ver_Tabela_Menu()
             break
         elif resposta == 4:
             Modificar_tb()
@@ -81,6 +81,11 @@ def Ver_Tabela():
         print(f"ID: {produto.id} Nome:{produto.nome_produto} Quantidade:{produto.quant} Preço:R${produto.preco} Marca:{produto.marca}")
     else:
         print("Não Existem Produtos Adiconados")
+    
+
+def Ver_Tabela_Menu():
+    Ver_Tabela()
+    menu_repetir()
 
 #UPDATE
 def Modificar_tb():
