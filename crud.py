@@ -21,7 +21,7 @@ def menu():
     while True:
         print("1- Adicionar Produto\n" "2- Excluir Produto\n" "3- Ver tabela\n" "4- Modificar Tabela")
         
-        resposta = int(input("O que você deseja fazer?"))
+        resposta = int(input("O que você deseja fazer?\n"))
 
         if resposta == 1:
             criar_produto()
@@ -50,6 +50,7 @@ def criar_produto():
 
     Session.add(novo_produto)
     Session.commit()
+    menu_repetir()
 
 #DELETE
 def excluir_produto():
@@ -63,6 +64,7 @@ def excluir_produto():
     else:
         print(f"Não existe nenhum produto com este nome...")
     
+    menu_repetir()
 
 #READ
 def Ver_Tabela():
@@ -114,6 +116,19 @@ def Modificar_tb():
         Session.commit()
         print("Produto Adiconado com Sucesso!")
     
+        menu_repetir()
 
+def menu_repetir():
+    while True:
+        resposta = int(input("Você Deseja fazer mais alguma coisa? [1]sim [2]não "))
+
+        if resposta == 1:
+            menu()
+            break
+        elif resposta == 2:
+            print("Saindo..........")
+            break
+        else:
+            print("Opção Invalida")
 menu()
 
