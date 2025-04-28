@@ -51,9 +51,7 @@ def criar_produto():
     quant = int(input("Quanto você quer adicionar?"))
     preco = float(input("Qual o preço do seu produto?"))
     marca = str(input("E qual marca deseja adicionar?"))
-
     novo_produto = Lojinha(nome_produto=nome_produto, quant=quant, preco=preco,marca=marca)
-
     Session.add(novo_produto)
     Session.commit()
     menu_repetir()
@@ -63,18 +61,16 @@ def excluir_produto():
     print("Aqui está a tabela de Produtos")
     Ver_Tabela()
 
-    nome_produto = str(input("Qual produto deseja excluir?"))
-    
+    id_produto = str(input("Qual produto deseja excluir?"))
 
-    produto = Session.query(Lojinha).filter_by(nome_produto=nome_produto).first()
+    produto = Session.query(Lojinha).filter_by(id_produto=id_produto).first()
     
     if produto:
         Session.delete(produto)
         Session.commit()
-        print(f"{nome_produto} foi deletado com sucesso!")
+        print(f"Produto Número: {id_produto} foi deletado com sucesso!")
     else:
         print(f"Não existe nenhum produto com este nome...")
-    
     menu_repetir()
 
 #READ
