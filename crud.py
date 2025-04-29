@@ -21,7 +21,11 @@ def menu():
     while True:
         print("1- Adicionar Produto\n" "2- Excluir Produto\n" "3- Ver tabela\n" "4- Modificar Tabela")
         
-        resposta = int(input("O que você deseja fazer?\n"))
+        try:
+            resposta = int(input("O que você deseja fazer?\n"))
+        except ValueError:
+            print("Apenas Números Permitidos!!!")
+            continue
 
         if resposta == 1:
             criar_produto()
