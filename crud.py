@@ -134,7 +134,7 @@ def Modificar_tb():
             return
         
         Session.commit()
-        print("Produto Adiconado com Sucesso!")
+        print("Produto Atualizado com Sucesso!")
     
         menu_repetir()
 
@@ -151,4 +151,3 @@ def menu_repetir():
         else:
             print("Opção Invalida")
 menu()
-
