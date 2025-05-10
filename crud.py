@@ -41,11 +41,12 @@ def menu():
             break
         else:
             print("Você Não Digitou Nenhuma Opção Permitida!!!")
-        return
+            menu()
+        return 
 
 #CREAT
 def criar_produto():
-    nome_produto = str(input("Qual o nome do seu produto?"))
+    nome_produto = str(input("Qual o nome do seu produto?")).strip()
     produto_existente = Session.query(Lojinha).filter_by(nome_produto=nome_produto).first()
 
     if produto_existente:
@@ -64,17 +65,20 @@ def criar_produto():
 def excluir_produto():
     print("Aqui está a tabela de Produtos")
     Ver_Tabela()
+    try:
+        id_produto = int(input("Qual produto deseja excluir?"))
+    except ValueError:
+        print("Digite um Número valido por favor")
+        return
 
-    id_produto = str(input("Qual produto deseja excluir?"))
-
-    produto = Session.query(Lojinha).filter_by(id_produto=id_produto).first()
+    produto = Session.query(Lojinha).filter_by(id=id_produto).first()
     
     if produto:
         Session.delete(produto)
         Session.commit()
         print(f"Produto Número: {id_produto} foi deletado com sucesso!")
     else:
-        print(f"Não existe nenhum produto com este nome...")
+        print(f"Não existe nenhum produto com este id...")
     menu_repetir()
 
 #READ
